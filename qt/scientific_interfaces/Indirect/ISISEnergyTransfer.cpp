@@ -496,7 +496,7 @@ void ISISEnergyTransfer::setInstrumentDefault() {
 
   if (instDetails["spectra-min"].isEmpty() ||
       instDetails["spectra-max"].isEmpty()) {
-    g_log.warning("Could not gather necessary data from parameter file.");
+    emit showMessageBox("Could not gather necessary data from parameter file.");
     return;
   }
 
