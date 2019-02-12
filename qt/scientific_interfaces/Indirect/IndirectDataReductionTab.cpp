@@ -117,15 +117,8 @@ QString IndirectDataReductionTab::getInstrumentDetail(
 }
 
 /**
- * Returns a pointer to the instrument configuration widget common to all tabs.
- *
- * @return Instrument config widget
+ * Returns the selected instrument, analyser or reflection
  */
-MantidWidgets::IndirectInstrumentConfig *
-IndirectDataReductionTab::getInstrumentConfiguration() const {
-  return m_idrUI->m_uiForm.iicInstrumentConfiguration;
-}
-
 QString IndirectDataReductionTab::getInstrumentName() const {
   return getInstrumentConfiguration()->getInstrumentName();
 }
