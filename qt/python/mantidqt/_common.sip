@@ -212,6 +212,14 @@ public:
   GenericDialog(QWidget *parent = nullptr);
 };
 
+class UserSubWindow : QMainWindow
+{
+%TypeHeaderCode
+#include "MantidQtWidgets/Common/UserSubWindow.h"
+%End
+private:
+  UserSubWindow();
+};
 
 class InterfaceManager {
 %TypeHeaderCode
@@ -227,6 +235,15 @@ public:
       const QString &optionalMsg = QString(),
       const QStringList &enabled = QStringList(),
       const QStringList &disabled = QStringList());
+
+  UserSubWindow *createSubWindow(const QString &interface_name,
+                                 QWidget *parent = nullptr);
+  void showHelpPage(const QString &url=QString());
+  void showWikiPage(const QString &page=QString());
+  void showAlgorithmHelp(const QString &name, const int version=-1);
+  void showConceptHelp(const QString &name);
+  void showFitFunctionHelp(const QString &name=QString());
+  void showCustomInterfaceHelp(const QString &name);
 };
 
 // ---------------------------------
