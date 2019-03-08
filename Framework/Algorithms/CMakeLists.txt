@@ -23,6 +23,7 @@ set ( SRC_FILES
 	src/CalculateDIFC.cpp
 	src/CalculateDynamicRange.cpp
 	src/CalculateEfficiency.cpp
+	src/CalculateSensitivity.cpp
 	src/CalculateFlatBackground.cpp
 	src/CalculateIqt.cpp
 	src/CalculatePolynomialBackground.cpp
@@ -109,8 +110,10 @@ set ( SRC_FILES
 	src/DiffractionFocussing2.cpp
 	src/DirectILLTubeBackground.cpp
 	src/Divide.cpp
+	src/EQSANSCorrectFrame.cpp
 	src/EQSANSResolution.cpp
 	src/EQSANSTofStructure.cpp
+	src/EQSANSUnfoldFrame.cpp
 	src/EditInstrumentGeometry.cpp
 	src/ElasticWindow.cpp
 	src/EstimateDivergence.cpp
@@ -272,6 +275,7 @@ set ( SRC_FILES
 	src/RunCombinationHelpers/RunCombinationHelper.cpp
 	src/RunCombinationHelpers/SampleLogsBehaviour.cpp
 	src/SANSCollimationLengthEstimator.cpp
+	src/SANSSolidAngle.cpp
 	src/SampleCorrections/DetectorGridDefinition.cpp
 	src/SampleCorrections/MCAbsorptionStrategy.cpp
 	src/SampleCorrections/MCInteractionVolume.cpp
@@ -364,6 +368,7 @@ set ( INC_FILES
 	inc/MantidAlgorithms/CalculateDIFC.h
 	inc/MantidAlgorithms/CalculateDynamicRange.h
 	inc/MantidAlgorithms/CalculateEfficiency.h
+	inc/MantidAlgorithms/CalculateSensitivity.h
 	inc/MantidAlgorithms/CalculateFlatBackground.h
 	inc/MantidAlgorithms/CalculateIqt.h
 	inc/MantidAlgorithms/CalculatePolynomialBackground.h
@@ -450,8 +455,10 @@ set ( INC_FILES
 	inc/MantidAlgorithms/DiffractionFocussing2.h
 	inc/MantidAlgorithms/DirectILLTubeBackground.h
 	inc/MantidAlgorithms/Divide.h
+	inc/MantidAlgorithms/EQSANSCorrectFrame.h
 	inc/MantidAlgorithms/EQSANSResolution.h
 	inc/MantidAlgorithms/EQSANSTofStructure.h
+	inc/MantidAlgorithms/EQSANSUnfoldFrame.h
 	inc/MantidAlgorithms/EditInstrumentGeometry.h
 	inc/MantidAlgorithms/ElasticWindow.h
 	inc/MantidAlgorithms/EstimateDivergence.h
@@ -617,6 +624,7 @@ set ( INC_FILES
 	inc/MantidAlgorithms/RunCombinationHelpers/RunCombinationHelper.h
 	inc/MantidAlgorithms/RunCombinationHelpers/SampleLogsBehaviour.h
 	inc/MantidAlgorithms/SANSCollimationLengthEstimator.h
+	inc/MantidAlgorithms/SANSSolidAngle.h
 	inc/MantidAlgorithms/SampleCorrections/DetectorGridDefinition.h
 	inc/MantidAlgorithms/SampleCorrections/IBeamProfile.h
 	inc/MantidAlgorithms/SampleCorrections/MCAbsorptionStrategy.h
@@ -720,6 +728,7 @@ set ( TEST_FILES
 	CalculateDIFCTest.h
 	CalculateDynamicRangeTest.h
 	CalculateEfficiencyTest.h
+	CalculateSensitivityTest.h
 	CalculateFlatBackgroundTest.h
 	CalculateIqtTest.h
 	CalculatePolynomialBackgroundTest.h
@@ -807,7 +816,9 @@ set ( TEST_FILES
 	DirectILLTubeBackgroundTest.h
 	DivideTest.h
 	EditInstrumentGeometryTest.h
-	ElasticWindowTest.h
+  ElasticWindowTest.h
+  EQSANSCorrectFrameTest.h
+  EQSANSUnfoldFrameTest.h
 	EstimateDivergenceTest.h
 	EstimateResolutionDiffractionTest.h
 	ExponentialCorrectionTest.h
@@ -962,6 +973,7 @@ set ( TEST_FILES
 	RunCombinationHelperTest.h
 	SampleLogsBehaviourTest.h
 	SANSCollimationLengthEstimatorTest.h
+	SANSSolidAngleTest.h
 	SassenaFFTTest.h
 	ScaleTest.h
 	ScaleXTest.h
