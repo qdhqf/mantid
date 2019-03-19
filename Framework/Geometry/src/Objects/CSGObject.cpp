@@ -1415,9 +1415,6 @@ double CSGObject::ConeSolidAngle(const V3D &observer,
   double r0(radius), r1(r0 - r_step);
 
   for (int st = 1; st < nstacks; ++st) {
-    if (st == nstacks)
-      z1 = height;
-
     for (int sl = 0; sl < nslices; ++sl) {
       int vertex = sl;
       Kernel::V3D pt1 =

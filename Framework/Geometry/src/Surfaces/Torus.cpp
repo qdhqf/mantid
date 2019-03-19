@@ -154,7 +154,6 @@ int Torus::setSurface(const std::string &Pstr)
 
   Kernel::V3D Norm;
   Kernel::V3D PtVec;
-  Norm[ptype] = 1.0;
 
   // Torus on X/Y/Z axis
   Norm[ptype] = 1.0;
