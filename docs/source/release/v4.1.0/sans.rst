@@ -18,3 +18,4 @@ Improvements
 ############
 
 - Increased font size in run table.
+- The warning message raised when you have supplied a transmission run without a direct run has been suppressed when data is still being input. The warning will still be raised if you load or process the data.
