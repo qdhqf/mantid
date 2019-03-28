@@ -414,7 +414,7 @@ public:
 
     auto fromIDFOrReductionAlg = ExperimentOptionDefaults();
     fromIDFOrReductionAlg.AnalysisMode = "PointDetectorAnalysis";
-    fromIDFOrReductionAlg.PolarizationAnalysis = "False";
+    fromIDFOrReductionAlg.PolarizationAnalysis = false;
     fromIDFOrReductionAlg.TransRunStartOverlap = 10.0;
     fromIDFOrReductionAlg.TransRunEndOverlap = 12.0;
     fromIDFOrReductionAlg.SummationType = "SumInLambda";

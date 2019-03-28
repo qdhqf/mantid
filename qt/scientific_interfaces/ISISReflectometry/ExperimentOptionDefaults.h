@@ -16,14 +16,10 @@ namespace CustomInterfaces {
 
 struct MANTIDQT_ISISREFLECTOMETRY_DLL ExperimentOptionDefaults {
   std::string AnalysisMode;
-  std::string PolarizationAnalysis;
   std::string SummationType;
   std::string ReductionType;
+  bool PolarizationAnalysis;
   bool IncludePartialBins;
-  std::string CRho;
-  std::string CAlpha;
-  std::string CAp;
-  std::string CPp;
   boost::optional<double> TransRunStartOverlap;
   boost::optional<double> TransRunEndOverlap;
   boost::optional<double> MomentumTransferMin;
