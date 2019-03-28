@@ -411,8 +411,8 @@ void ReflSettingsPresenter::getExpDefaults() {
       value_or(parameters.optional<std::string>("AnalysisMode"),
                alg->getPropertyValue("AnalysisMode"));
   defaults.PolarizationAnalysis =
-      value_or(parameters.optional<std::string>("PolarizationAnalysis"),
-               alg->getPropertyValue("PolarizationAnalysis"));
+      value_or(parameters.optional<bool>("PolarizationAnalysis"),
+               alg->getProperty("PolarizationAnalysis"));
 
   defaults.SummationType =
       value_or(parameters.optional<std::string>("SummationType"),
@@ -425,11 +425,6 @@ void ReflSettingsPresenter::getExpDefaults() {
   defaults.IncludePartialBins =
       value_or(parameters.optional<bool>("IncludePartialBins"),
                alg->getProperty("IncludePartialBins"));
-
-  defaults.CRho = value_or(parameters.optional<std::string>("crho"), "1");
-  defaults.CAlpha = value_or(parameters.optional<std::string>("calpha"), "1");
-  defaults.CAp = value_or(parameters.optional<std::string>("cAp"), "1");
-  defaults.CPp = value_or(parameters.optional<std::string>("cPp"), "1");
 
   defaults.MomentumTransferMin = parameters.optional<double>("Q min");
   defaults.MomentumTransferMax = parameters.optional<double>("Q max");
