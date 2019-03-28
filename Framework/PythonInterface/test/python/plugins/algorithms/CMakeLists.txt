@@ -44,7 +44,6 @@ set(TEST_PY_FILES
     ExportSpectraMaskTest.py
     FilterLogByTimeTest.py
     FindEPPTest.py
-    FindReflectometryLinesTest.py
     FitGaussianTest.py
     FractionalIndexingTest.py
     GetEiT0atSNSTest.py
