@@ -93,11 +93,7 @@ public:
 
   void onCallReturnDefaultPolarisationCorrections(MockSettingsView &mockView) {
     ON_CALL(mockView, getPolarisationCorrections())
-        .WillByDefault(Return("None"));
-    ON_CALL(mockView, getCRho()).WillByDefault(Return(""));
-    ON_CALL(mockView, getCAlpha()).WillByDefault(Return(""));
-    ON_CALL(mockView, getCAp()).WillByDefault(Return(""));
-    ON_CALL(mockView, getCPp()).WillByDefault(Return(""));
+        .WillByDefault(Return("False"));
   }
 
   void onCallReturnDefaultInstrumentSettings(MockSettingsView &mockView) {
@@ -194,20 +190,10 @@ public:
 
     EXPECT_CALL(mockView, getPolarisationCorrections())
         .Times(AtLeast(1))
-        .WillOnce(Return("PNR"));
-    EXPECT_CALL(mockView, getCAp())
-        .Times(AtLeast(1))
-        .WillOnce(Return("100.0,17.0,44.0"));
-    EXPECT_CALL(mockView, getCPp())
-        .Times(AtLeast(1))
-        .WillOnce(Return("0.54,0.33,1.81"));
+        .WillOnce(Return("True"));
 
     auto options = presenter.getReductionOptions();
-    TS_ASSERT_EQUALS(variantToString(options["PolarizationAnalysis"]), "PNR");
-    TS_ASSERT_EQUALS(variantToString(options["CRho"]), "");
-    TS_ASSERT_EQUALS(variantToString(options["CAlpha"]), "");
-    TS_ASSERT_EQUALS(variantToString(options["CAp"]), "100.0,17.0,44.0");
-    TS_ASSERT_EQUALS(variantToString(options["CPp"]), "0.54,0.33,1.81");
+    TS_ASSERT_EQUALS(variantToString(options["PolarizationAnalysis"]), "True");
 
     TS_ASSERT(Mock::VerifyAndClearExpectations(&mockView));
   }
@@ -428,11 +414,7 @@ public:
 
     auto fromIDFOrReductionAlg = ExperimentOptionDefaults();
     fromIDFOrReductionAlg.AnalysisMode = "PointDetectorAnalysis";
-    fromIDFOrReductionAlg.PolarizationAnalysis = "None";
-    fromIDFOrReductionAlg.CRho = "1.006831,-0.011467,0.002244,-0.000095";
-    fromIDFOrReductionAlg.CAlpha = "1.017526,-0.017183,0.003136,-0.000140";
-    fromIDFOrReductionAlg.CAp = "0.917940,0.038265,-0.006645,0.000282";
-    fromIDFOrReductionAlg.CPp = "0.972762,0.001828,-0.000261,0.0";
+    fromIDFOrReductionAlg.PolarizationAnalysis = "False";
     fromIDFOrReductionAlg.TransRunStartOverlap = 10.0;
     fromIDFOrReductionAlg.TransRunEndOverlap = 12.0;
     fromIDFOrReductionAlg.SummationType = "SumInLambda";
@@ -542,10 +524,6 @@ public:
 
     // Experiment settings should be called
     EXPECT_CALL(mockView, getAnalysisMode()).Times(Exactly(2));
-    EXPECT_CALL(mockView, getCRho()).Times(Exactly(0));
-    EXPECT_CALL(mockView, getCAlpha()).Times(Exactly(0));
-    EXPECT_CALL(mockView, getCAp()).Times(Exactly(0));
-    EXPECT_CALL(mockView, getCPp()).Times(Exactly(0));
     EXPECT_CALL(mockView, getPolarisationCorrections()).Times(Exactly(1));
     EXPECT_CALL(mockView, getFloodCorrection()).Times(Exactly(1));
     EXPECT_CALL(mockView, getStartOverlap()).Times(Exactly(2));
