@@ -147,7 +147,7 @@ class ReflectometryISISLoadAndProcess(DataProcessorAlgorithm):
             'NormalizeByIntegratedMonitors', 'Params', 'StartOverlap', 'EndOverlap',
             'TransmissionProcessingInstructions', 'CorrectionAlgorithm', 'Polynomial', 'C0', 'C1',
             'MomentumTransferMin', 'MomentumTransferStep', 'MomentumTransferMax', 'ScaleFactor',
-            'PolarizationAnalysis', 'CPp', 'CAp', 'CRho', 'CAlpha', 'FloodCorrection',
+            'PolarizationAnalysis', 'FloodCorrection',
             'FloodWorkspace', 'Debug']
         self.copyProperties('ReflectometryReductionOneAuto', self._reduction_properties)
 

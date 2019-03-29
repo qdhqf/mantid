@@ -93,7 +93,7 @@ public:
 
   void onCallReturnDefaultPolarisationCorrections(MockSettingsView &mockView) {
     ON_CALL(mockView, getPolarisationCorrections())
-        .WillByDefault(Return("False"));
+        .WillByDefault(Return(false));
   }
 
   void onCallReturnDefaultInstrumentSettings(MockSettingsView &mockView) {
@@ -190,10 +190,10 @@ public:
 
     EXPECT_CALL(mockView, getPolarisationCorrections())
         .Times(AtLeast(1))
-        .WillOnce(Return("True"));
+        .WillOnce(Return(true));
 
     auto options = presenter.getReductionOptions();
-    TS_ASSERT_EQUALS(variantToString(options["PolarizationAnalysis"]), "True");
+    TS_ASSERT_EQUALS(options["PolarizationAnalysis"], true);
 
     TS_ASSERT(Mock::VerifyAndClearExpectations(&mockView));
   }
