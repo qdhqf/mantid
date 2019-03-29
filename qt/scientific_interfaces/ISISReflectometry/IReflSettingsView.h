@@ -49,7 +49,7 @@ public:
                    MantidQt::MantidWidgets::DataProcessor::OptionsQMap>
   getPerAngleOptions() const = 0;
   virtual std::string getStartOverlap() const = 0;
-  virtual std::string getEndOverlap() const = 0; 
+  virtual std::string getEndOverlap() const = 0;
   virtual std::string getFloodCorrection() const = 0;
   virtual std::string getFloodWorkspace() const = 0;
   virtual bool getPolarisationCorrections() const = 0;
