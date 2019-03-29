@@ -51,16 +51,14 @@ void QtReflSettingsView::initLayout() {
           SLOT(requestExpDefaults()));
   connect(m_ui.getInstDefaultsButton, SIGNAL(clicked()), this,
           SLOT(requestInstDefaults()));
-  connect(m_ui.expSettingsGroup, SIGNAL(clicked(bool)), this,
-          SLOT(setPolarisationOptionsEnabled(bool)));
+  connect(m_ui.polCorrCheckBox, SIGNAL(clicked(bool)), this,
+          SLOT(setIsPolCorrEnabled(bool)));
   connect(m_ui.summationTypeComboBox, SIGNAL(currentIndexChanged(int)), this,
           SLOT(summationTypeChanged(int)));
   connect(m_ui.addPerAngleOptionsButton, SIGNAL(clicked()), this,
           SLOT(addPerAngleOptionsTableRow()));
   connect(m_ui.correctDetectorsCheckBox, SIGNAL(clicked(bool)), this,
           SLOT(setDetectorCorrectionEnabled(bool)));
-  connect(m_ui.polCorrComboBox, SIGNAL(currentIndexChanged(int)), this,
-          SLOT(setPolCorPageForIndex(int)));
   connect(m_ui.floodCorComboBox, SIGNAL(currentIndexChanged(const QString &)),
           this, SLOT(floodCorComboBoxChanged(const QString &)));
 }
@@ -166,11 +164,7 @@ void QtReflSettingsView::registerExperimentSettingsWidgets(
   registerSettingWidget(*m_ui.analysisModeComboBox, "AnalysisMode", alg);
   registerSettingWidget(*m_ui.startOverlapEdit, "StartOverlap", alg);
   registerSettingWidget(*m_ui.endOverlapEdit, "EndOverlap", alg);
-  registerSettingWidget(*m_ui.polCorrComboBox, "PolarizationAnalysis", alg);
-  registerSettingWidget(*m_ui.CRhoEdit, "CRho", alg);
-  registerSettingWidget(*m_ui.CAlphaEdit, "CAlpha", alg);
-  registerSettingWidget(*m_ui.CApEdit, "CAp", alg);
-  registerSettingWidget(*m_ui.CPpEdit, "CPp", alg);
+  registerSettingWidget(*m_ui.polCorrCheckBox, "PolarizationAnalysis", alg);
   registerSettingWidget(stitchOptionsLineEdit(), "Params", alg);
   registerSettingWidget(*m_ui.floodCorComboBox, "FloodCorrection", alg);
   registerSettingWidget(*m_ui.floodWorkspaceWsSelector, "FloodWorkspace", alg);
@@ -247,11 +241,7 @@ void QtReflSettingsView::setExpDefaults(ExperimentOptionDefaults defaults) {
   setSelected(*m_ui.summationTypeComboBox, defaults.SummationType);
   setText(*m_ui.startOverlapEdit, defaults.TransRunStartOverlap);
   setText(*m_ui.endOverlapEdit, defaults.TransRunEndOverlap);
-  setSelected(*m_ui.polCorrComboBox, defaults.PolarizationAnalysis);
-  setText(*m_ui.CRhoEdit, defaults.CRho);
-  setText(*m_ui.CAlphaEdit, defaults.CAlpha);
-  setText(*m_ui.CApEdit, defaults.CAp);
-  setText(*m_ui.CPpEdit, defaults.CPp);
+  setChecked(*m_ui.polCorrCheckBox, defaults.PolarizationAnalysis);
   setText(*m_ui.startOverlapEdit, defaults.TransRunStartOverlap);
   setText(*m_ui.endOverlapEdit, defaults.TransRunEndOverlap);
   setText(stitchOptionsLineEdit(), defaults.StitchParams);
@@ -399,31 +389,6 @@ void QtReflSettingsView::setInstDefaults(InstrumentOptionDefaults defaults) {
 
 void QtReflSettingsView::setDetectorCorrectionEnabled(bool enabled) {
   m_ui.detectorCorrectionTypeComboBox->setEnabled(enabled);
-}
-
-/* Sets the enabled status of polarisation corrections and parameters
- * @param enable :: [input] bool to enable options or not
- */
-void QtReflSettingsView::setPolarisationOptionsEnabled(bool enable) {
-
-  if (enable && (!m_isPolCorrEnabled || !experimentSettingsEnabled()))
-    return;
-
-  m_ui.polCorrComboBox->setEnabled(enable);
-  m_ui.CRhoEdit->setEnabled(enable);
-  m_ui.CAlphaEdit->setEnabled(enable);
-  m_ui.CApEdit->setEnabled(enable);
-  m_ui.CPpEdit->setEnabled(enable);
-
-  if (!enable) {
-    // Set polarisation corrections text to 'None' when disabled
-    setSelected(*m_ui.polCorrComboBox, "None");
-    // Clear all parameters as well
-    m_ui.CRhoEdit->clear();
-    m_ui.CAlphaEdit->clear();
-    m_ui.CApEdit->clear();
-    m_ui.CPpEdit->clear();
-  }
 }
 
 /** Add a new row to the transmission runs table
@@ -592,36 +557,8 @@ std::string QtReflSettingsView::getEndOverlap() const {
 /** Return selected polarisation corrections
  * @return :: selected polarisation corrections
  */
-std::string QtReflSettingsView::getPolarisationCorrections() const {
-  return getText(*m_ui.polCorrComboBox);
-}
-
-/** Return CRho
- * @return :: polarization correction CRho
- */
-std::string QtReflSettingsView::getCRho() const {
-  return getText(*m_ui.CRhoEdit);
-}
-
-/** Return CAlpha
- * @return :: polarization correction CAlpha
- */
-std::string QtReflSettingsView::getCAlpha() const {
-  return getText(*m_ui.CAlphaEdit);
-}
-
-/** Return CAp
- * @return :: polarization correction CAp
- */
-std::string QtReflSettingsView::getCAp() const {
-  return getText(*m_ui.CApEdit);
-}
-
-/** Return CPp
- * @return :: polarization correction CPp
- */
-std::string QtReflSettingsView::getCPp() const {
-  return getText(*m_ui.CPpEdit);
+bool QtReflSettingsView::getPolarisationCorrections() const {
+  return m_ui.polCorrCheckBox->isChecked();
 }
 
 std::string QtReflSettingsView::getFloodCorrection() const {
@@ -727,19 +664,6 @@ bool QtReflSettingsView::experimentSettingsEnabled() const {
  */
 bool QtReflSettingsView::instrumentSettingsEnabled() const {
   return m_ui.instSettingsGroup->isChecked();
-}
-
-/**
-  Set the current page index of m_ui.polCorStackedWidget depending on the index
-  of m_ui.polCorrComboBox. They don't match 1-to-1 because PA and PNR options
-  share a page.
-  @param index :: New current index of m_ui.polCorrComboBox.
- */
-void QtReflSettingsView::setPolCorPageForIndex(int index) {
-  assert(m_ui.polCorrComboBox->count() == 4);
-  assert(m_ui.polCorStackedWidget->count() == 3);
-  static std::array<int, 4> const indexMap = {{0, 1, 1, 2}};
-  m_ui.polCorStackedWidget->setCurrentIndex(indexMap[index]);
 }
 
 } // namespace CustomInterfaces

@@ -102,7 +102,6 @@ void ReflSettingsPresenter::setInstrumentName(const std::string &instName) {
   m_currentInstrumentName = instName;
   bool enable = instName != "INTER" && instName != "SURF";
   m_view->setIsPolCorrEnabled(enable);
-  m_view->setPolarisationOptionsEnabled(enable);
 }
 
 OptionsQMap ReflSettingsPresenter::transmissionOptionsMap() const {
@@ -229,7 +228,7 @@ OptionsQMap ReflSettingsPresenter::getReductionOptions() const {
   if (m_view->experimentSettingsEnabled()) {
     addIfNotEmpty(options, "AnalysisMode", m_view->getAnalysisMode());
     addIfNotEmpty(options, "PolarizationAnalysis",
-                  m_view->getPolarisationCorrections());
+                  asAlgorithmPropertyBool(m_view->getPolarisationCorrections()));
     addIfNotEmpty(options, "FloodCorrection", m_view->getFloodCorrection());
     addIfNotEmpty(options, "FloodWorkspace", m_view->getFloodWorkspace());
     addIfNotEmpty(options, "StartOverlap", m_view->getStartOverlap());

@@ -13,8 +13,6 @@ bool operator==(const ExperimentOptionDefaults &lhs,
                 const ExperimentOptionDefaults &rhs) {
   return lhs.AnalysisMode == rhs.AnalysisMode &&
          lhs.PolarizationAnalysis == rhs.PolarizationAnalysis &&
-         lhs.CRho == rhs.CRho && lhs.CAlpha == rhs.CAlpha &&
-         lhs.CAp == rhs.CAp && lhs.CPp == rhs.CPp &&
          lhs.TransRunStartOverlap == rhs.TransRunStartOverlap &&
          lhs.TransRunEndOverlap == rhs.TransRunEndOverlap &&
          lhs.MomentumTransferMin == rhs.MomentumTransferMin &&
@@ -32,8 +30,6 @@ std::ostream &operator<<(std::ostream &os,
                          ExperimentOptionDefaults const &defaults) {
   os << "ExperimentOptionDefaults: { AnalysisMode: '" << defaults.AnalysisMode
      << ", \nPolarizationAnalysis: '" << defaults.PolarizationAnalysis
-     << "',\nRho: '" << defaults.CRho << "',\nAlpha: '" << defaults.CAlpha
-     << "',\nAp: '" << defaults.CAp << "', \nPp: '" << defaults.CPp
      << "',\nSummationType: '" << defaults.SummationType
      << "', \nReductionType: '" << defaults.ReductionType
      << "', \nIncludePartialBins: '" << defaults.IncludePartialBins;

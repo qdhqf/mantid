@@ -49,15 +49,7 @@ public:
   /// Return end overlap for transmission runs
   std::string getEndOverlap() const override;
   /// Return selected polarisation corrections
-  std::string getPolarisationCorrections() const override;
-  /// Return CRho
-  std::string getCRho() const override;
-  /// Return CAlpha
-  std::string getCAlpha() const override;
-  /// Return CAp
-  std::string getCAp() const override;
-  /// Return Cpp
-  std::string getCPp() const override;
+  bool getPolarisationCorrections() const override;
   /// Return FloodCorrection
   std::string getFloodCorrection() const override;
   /// Return FloodWorkspace
@@ -115,8 +107,6 @@ public slots:
   void requestExpDefaults() const;
   void requestInstDefaults() const;
   void summationTypeChanged(int reductionTypeIndex);
-  /// Sets enabled status for polarisation corrections and parameters
-  void setPolarisationOptionsEnabled(bool enable) override;
   void setReductionTypeEnabled(bool enable) override;
   void setIncludePartialBinsEnabled(bool enable) override;
   void setDetectorCorrectionEnabled(bool enable) override;
@@ -128,7 +118,6 @@ public slots:
   void addPerAngleOptionsTableRow();
 
 private slots:
-  void setPolCorPageForIndex(int index);
   void floodCorComboBoxChanged(const QString &text);
 
 private:

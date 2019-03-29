@@ -49,14 +49,10 @@ public:
                    MantidQt::MantidWidgets::DataProcessor::OptionsQMap>
   getPerAngleOptions() const = 0;
   virtual std::string getStartOverlap() const = 0;
-  virtual std::string getEndOverlap() const = 0;
-  virtual std::string getPolarisationCorrections() const = 0;
-  virtual std::string getCRho() const = 0;
-  virtual std::string getCAlpha() const = 0;
-  virtual std::string getCAp() const = 0;
-  virtual std::string getCPp() const = 0;
+  virtual std::string getEndOverlap() const = 0; 
   virtual std::string getFloodCorrection() const = 0;
   virtual std::string getFloodWorkspace() const = 0;
+  virtual bool getPolarisationCorrections() const = 0;
   /// Instrument settings
   virtual std::string getIntMonCheck() const = 0;
   virtual std::string getMonitorIntegralMin() const = 0;
@@ -88,8 +84,6 @@ public:
   virtual void setIsPolCorrEnabled(bool enable) const = 0;
   virtual void setReductionTypeEnabled(bool enable) = 0;
   virtual void setIncludePartialBinsEnabled(bool enable) = 0;
-  /// Set polarisation corrections and parameters enabled/disabled
-  virtual void setPolarisationOptionsEnabled(bool enable) = 0;
   virtual void setDetectorCorrectionEnabled(bool enable) = 0;
   virtual void disableAll() = 0;
   virtual void enableAll() = 0;
